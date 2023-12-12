@@ -9,11 +9,14 @@ function App() {
   const addTodo = (newTodo: string) => {
     setTodos((prev) => [...prev, new Todo(newTodo)]);
   };
+  const deleteTodo = (id: string) => {
+    setTodos((prev) => prev.filter((item) => item.id !== id));
+  };
 
   return (
     <div>
       <NewTodo addTodo={addTodo} />
-      <Todos items={todos} />
+      <Todos items={todos} deleteTodo={deleteTodo} />
     </div>
   );
 }
