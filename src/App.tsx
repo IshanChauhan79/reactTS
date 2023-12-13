@@ -1,22 +1,13 @@
-import { useState } from "react";
 import NewTodo from "./Components/NewTodo";
 import Todos from "./Components/Todos";
-import Todo from "./models/todo";
+import useTodoContext from "./customHooks/useTodoContext";
 
 function App() {
-  const [todos, setTodos] = useState<Todo[]>([]);
-
-  const addTodo = (newTodo: string) => {
-    setTodos((prev) => [...prev, new Todo(newTodo)]);
-  };
-  const deleteTodo = (id: string) => {
-    setTodos((prev) => prev.filter((item) => item.id !== id));
-  };
-
+  const { addTodo, items, deleteTodo } = useTodoContext();
   return (
     <div>
       <NewTodo addTodo={addTodo} />
-      <Todos items={todos} deleteTodo={deleteTodo} />
+      <Todos items={items} deleteTodo={deleteTodo} />
     </div>
   );
 }
